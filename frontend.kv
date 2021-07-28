@@ -1,0 +1,431 @@
+<LoadingScreen>
+    GridLayout:
+        cols: 1
+
+        Button:
+            background_normal: 'loadingscreen.png'
+            background_down: ''
+            on_press: root.startup()
+
+<PrevData>
+    GridLayout:
+        cols: 1
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: ''
+            size_hint_y: 0.2
+
+        Label:
+            id: prev_data_label
+            text: 'Please enter your \n total expenses for last month '
+            color: (0,0,0,1)
+            size_hint_y: 0.2
+            halign: 'center'
+
+        TextInput:
+            id: prev_data
+            multiline: False
+            size_hint_y: 0.1
+
+        Button:
+            text: 'Submit'
+            size_hint_y: 0.1
+            on_press: root.add_prev_data()
+
+        Label:
+            text: ''
+            size_hint_y: 0.4
+
+<HomeScreen>
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            cols: 1
+            padding: 10
+            spacing: 10
+            size_hint_y: 0.3
+
+            MDCard:
+                size_hint: 0.8,0.8
+                radius: [10]
+                pos_hint: {"center_x":0.5,"center_y": 0.5}
+                padding: 30
+                spacing: 30
+                orientation: 'vertical'
+
+                Label:
+                    text: 'Expenses for this Month'
+                    color: (0,0,0,0.7)
+                    font_size: 12
+                    size_hint_y: 0.1
+
+                Label:
+                    id: expenses_for_this_month
+                    text: 'Unable to retrive data'
+                    color: (0,0,0,1)
+                    font_size: 20
+                    size_hint_y: 0.05
+
+
+
+                Label:
+                    text: 'Expenses for previous month'
+                    color: (0,0,0,0.7)
+                    font_size: 12
+                    size_hint_y: 0.1
+
+                Label:
+                    id: expenses_for_previous_month
+                    text: 'Unable to retrive data'
+                    color: (0,0,0,1)
+                    font_size: 18
+                    size_hint_y: 0.05
+
+                Label:
+                    id: percentage
+                    text: 'Unable to retrive data'
+                    color: (0,0,0,0.5)
+                    font_size: 12
+                    size_hint_y: 0.1
+
+
+        GridLayout:
+            cols:1
+            size_hint_y: 0.45
+            padding: 10
+            spacing: 10
+
+            MDCard:
+                size_hint: 1,1
+                radius: [10]
+
+                pos_hint: {"center_x":0.5,"center_y": 0.5}
+                padding: 25
+                spacing: 15
+                orientation: 'vertical'
+
+                MDTextFieldRound:
+                    id: particular
+                    hint_text: 'Particular'
+                    icon_left: 'menu-open'
+                    size_hint_x: 1
+                    font_size: 18
+                    pos_hint: {"center_x": 0.5}
+
+                MDTextFieldRound:
+                    id: amount
+                    hint_text: 'Enter Amount'
+                    icon_left: 'cash-plus'
+                    size_hint_x: 1
+                    font_size: 18
+                    pos_hint: {"center_x": 0.5}
+
+                GridLayout:
+                    cols: 2
+
+                    size_hint_y: 0.1
+
+                    Button:
+                        text: 'Add Data'
+
+                        on_release: root.feed_data()
+
+                    Button:
+                        text: 'Withdrawn'
+
+                        on_release: root.feed_withdrawn()
+
+                Button:
+                    text: 'Use Constants'
+                    size_hint_y: 0.1
+                    on_release:
+                        root.manager.current='constant_screen'
+                        root.manager.transition.direction='left'
+
+
+
+
+
+        GridLayout:
+            size_hint_y: 0.25
+            cols:1
+            padding: 10
+            spacing: 10
+
+            MDCard:
+                size_hint: 0.8,0.8
+                radius: [10]
+
+                pos_hint: {"center_x":0.5,"center_y": 0.5}
+                padding: 10
+                spacing: 10
+                orientation: 'vertical'
+
+                Button:
+                    text: 'View Data'
+                    size_hint_y: 0.1
+                    on_release: root.manager.current= 'view_data'
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: 0.1
+
+                    Button:
+                        text: 'Open Excel'
+
+                        on_release: root.openxl()
+
+                    Button:
+                        text: 'Quit'
+                        on_release: root.quit()
+
+
+
+<ConstantScreen>
+    GridLayout:
+        cols: 1
+
+        MDToolbar:
+            size_hint:(1,0.1)
+            title: 'Recurring'
+            left_action_items: [["arrow-left", lambda x: root.goback()]]
+
+
+        ScrollView:
+            padding: 10
+            spacing: 10
+            do_scroll_x: False
+
+
+            GridLayout:
+                cols:1
+
+                id: viewarea
+
+        MDBottomNavigation:
+            size_hint:(1,0.1)
+            MDBottomNavigationItem:
+                icon: 'plus-box-outline'
+                on_tab_press: root.addbutton()
+
+            MDBottomNavigationItem:
+                icon: 'vector-arrange-above'
+                on_tab_press: root.managebutton()
+
+
+
+
+<AddConstant>
+    GridLayout:
+        cols: 1
+
+        MDToolbar:
+            size_hint:(1,0.1)
+            title: 'Add Constant'
+            left_action_items: [["arrow-left", lambda x: root.goback()]]
+
+        GridLayout:
+            cols: 1
+            padding: 10
+            spacing: 10
+            size_hint_y:0.9
+
+
+            MDCard:
+                size_hint: 0.8,0.5
+
+                pos_hint: {"center_x":0.5,"center_y": 0.5}
+                padding: 30
+                spacing: 30
+                orientation: 'vertical'
+
+                Label:
+
+                    text: ''
+                    size_hint_y: 0.06
+
+                MDTextFieldRound:
+                    id: recurring_particular
+                    hint_text: 'Enter Particular'
+                    icon_left: 'menu-open'
+                    size_hint_x: 1
+                    font_size: 18
+                    pos_hint: {"center_x": 0.5}
+
+                MDTextFieldRound:
+                    id: recurring_amount
+                    hint_text: 'Enter Amount'
+                    icon_left: 'cash-plus'
+                    size_hint_x: 1
+                    font_size: 18
+                    helper_text: 'Enter only numbers'
+                    helper_text_mode: 'on_error'
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: 'SUBMIT'
+                    font_size: 20
+                    pos_hint: {'center_x': 0.5}
+                    on_release: root.addconstant()
+
+                Widget:
+                    size_hint_y: 0.1
+
+<ManageConstant>
+    GridLayout:
+        cols: 1
+
+        MDToolbar:
+            size_hint:(1,0.1)
+            title: 'Edit'
+            left_action_items: [["close", lambda x: root.goback()]]
+
+        ScrollView:
+            padding: 10
+            spacing: 10
+            do_scroll_x: False
+
+            GridLayout:
+                cols:1
+                id: viewarea
+
+<EditConstant>
+    GridLayout:
+        cols: 1
+
+        MDToolbar:
+            size_hint_y: 0.1
+            title: 'Edit'
+            left_action_items: [["arrow-left", lambda x: root.goback()]]
+
+        GridLayout:
+            cols: 1
+            padding: 10
+            spacing: 10
+
+            Label:
+                text: ''
+                size_hint_y: 0.1
+
+            GridLayout:
+                cols:1
+
+                MDCard:
+                    pos_hint: {"center_x":0.5,"center_y": 0.5}
+                    padding: 30
+                    spacing: 10
+                    orientation: 'vertical'
+
+                    Label:
+                        id: update_label
+                        text: 'Enter Amount to be updated'
+                        color: (0,0,0,1)
+                        font_size: 15
+                        size_hint_y: 0.5
+
+
+                    Label:
+                        id: particular_name
+                        text: ''
+                        color: (0,0,0,1)
+                        font_size: 15
+                        size_hint_y: 0.05
+
+                    MDTextFieldRound:
+                        id: updated_amount
+                        hint_text: 'Enter Particular'
+                        icon_left: 'menu-open'
+                        size_hint_x: 1
+                        font_size: 18
+                        pos_hint: {"center_x": 0.5}
+
+                    MDFillRoundFlatButton:
+                        text: 'Update'
+                        font_size: 20
+                        pos_hint: {'center_x': 0.5}
+                        on_release: root.update()
+
+            Label:
+                text: '- OR -'
+                color: (0,0,0,1)
+                font_size: 20
+                size_hint_y: 0.1
+
+            Button:
+                text: 'Remove'
+                size_hint_y: 0.1
+                on_release: root.remove()
+
+
+            Label:
+                text: ''
+                size_hint_y: 0.15
+
+<ViewData>
+    GridLayout:
+        cols: 1
+
+        MDToolbar:
+            size_hint_y: 0.1
+            title: 'View Data'
+            left_action_items: [["arrow-left", lambda x: root.goback()]]
+
+        Spinner:
+            id: base_sheet
+            text: 'Select Sheet'
+            values: []
+            size_hint_y: 0.1
+            on_text: root.view_table(base_sheet.text)
+
+        GridLayout:
+            cols:1
+            padding: 10
+            spacing: 10
+            id: tableview
+
+
+
+
+
+<RootWidget>:
+    canvas.before:
+        Color:
+            rgba: (240/255, 1, 250/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    LoadingScreen:
+        id: loading_screen
+        name: 'loading_screen'
+
+    PrevData:
+        id: prev_data
+        name: 'prev_data'
+
+    HomeScreen:
+        id: home_screen
+        name: 'home_screen'
+
+    ConstantScreen:
+        id: constant_screen
+        name: 'constant_screen'
+
+    AddConstant:
+        id: add_constant
+        name: 'add_constant'
+
+    ManageConstant:
+        id: manage_constant
+        name: 'manage_constant'
+
+    EditConstant:
+        id: edit_constant
+        name: 'edit_constant'
+
+    ViewData:
+        id: view_data
+        name: 'view_data'
