@@ -43,7 +43,8 @@ class Regular_Check:
             if p_month < 1:
                 p_month = 12
 
-            prev_month = calendar.month_name[p_month]
+            datetime_object = datetime.strptime(p_month, "%m")
+            prev_month = datetime_object.strftime("%B")
             pmws = wb[prev_month]
             prev_month_total = pmws['C3'].value
             title = pmws['A1'].value
@@ -57,7 +58,7 @@ class Regular_Check:
             if d_month < 1:
                 d_month = 12 - d_month
 
-            del_month = calendar.month_name[d_month]
+            del_month = calendr.moanth_name[d_month]
             if del_month in existing:
                 XL.delete_sheet(del_month)
 
