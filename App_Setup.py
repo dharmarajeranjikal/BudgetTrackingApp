@@ -58,7 +58,8 @@ class Regular_Check:
             if d_month < 1:
                 d_month = 12 - d_month
 
-            del_month = calendr.moanth_name[d_month]
+            datetime_object = datetime.strptime(d_month, "%m")
+            del_month = datetime_object.strftime("%B")
             if del_month in existing:
                 XL.delete_sheet(del_month)
 
