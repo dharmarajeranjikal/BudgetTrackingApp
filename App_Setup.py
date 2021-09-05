@@ -1,7 +1,7 @@
 from Data_Plotter import Excel
 from openpyxl import load_workbook
-from datetime import date
-import calendar
+from datetime import date,datetime
+
 import os
 
 ### This Package works on setting up the program
@@ -24,7 +24,8 @@ class First_Setup:
         if p_month < 1:
             p_month = 12
 
-        prev_month = calendar.month_name[p_month]
+        datetime_object = datetime.strptime(p_month, "%m")
+        prev_month = datetime_object.strftime("%B")
         date = today.strftime("%m/%d")
         XL.add_data('Yearly', prev_month, previous_amount)
         XL.new_sheet(today.strftime("%B"), today.strftime("%Y") )
