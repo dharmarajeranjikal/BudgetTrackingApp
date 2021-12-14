@@ -24,9 +24,10 @@ class First_Setup:
         if p_month < 1:
             p_month = 12
 
-        datetime_object = datetime.strptime(p_month, "%m")
+        datetime_object = datetime.strptime(str(p_month), "%m")
         prev_month = datetime_object.strftime("%B")
-        date = today.strftime("%m/%d")
+        # print(prev_month)
+        # date = today.strftime("%m/%d")
         XL.add_data('Yearly', prev_month, previous_amount)
         XL.new_sheet(today.strftime("%B"), today.strftime("%Y") )
 
@@ -43,7 +44,7 @@ class Regular_Check:
             if p_month < 1:
                 p_month = 12
 
-            datetime_object = datetime.strptime(p_month, "%m")
+            datetime_object = datetime.strptime(str(p_month), "%m")
             prev_month = datetime_object.strftime("%B")
             pmws = wb[prev_month]
             prev_month_total = pmws['C3'].value
@@ -58,7 +59,7 @@ class Regular_Check:
             if d_month < 1:
                 d_month = 12 - d_month
 
-            datetime_object = datetime.strptime(d_month, "%m")
+            datetime_object = datetime.strptime(str(d_month), "%m")
             del_month = datetime_object.strftime("%B")
             if del_month in existing:
                 XL.delete_sheet(del_month)
