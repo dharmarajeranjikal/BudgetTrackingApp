@@ -50,23 +50,23 @@
 
             MDCard:
                 size_hint: 0.8,0.8
-                radius: [10]
+                radius: [25]
                 pos_hint: {"center_x":0.5,"center_y": 0.5}
                 padding: 30
-                spacing: 30
+                spacing: 15
                 orientation: 'vertical'
 
                 Label:
                     text: 'Expenses for this Month'
                     color: (0,0,0,0.7)
-                    font_size: 12
-                    size_hint_y: 0.1
+                    font_size: 20
+                    size_hint_y: 0.05
 
                 Label:
                     id: expenses_for_this_month
                     text: 'Unable to retrive data'
                     color: (0,0,0,1)
-                    font_size: 20
+                    font_size: 30
                     size_hint_y: 0.05
 
 
@@ -74,22 +74,22 @@
                 Label:
                     text: 'Expenses for previous month'
                     color: (0,0,0,0.7)
-                    font_size: 12
-                    size_hint_y: 0.1
+                    font_size: 20
+                    size_hint_y: 0.05
 
                 Label:
                     id: expenses_for_previous_month
                     text: 'Unable to retrive data'
                     color: (0,0,0,1)
-                    font_size: 18
+                    font_size: 30
                     size_hint_y: 0.05
 
                 Label:
                     id: percentage
                     text: 'Unable to retrive data'
                     color: (0,0,0,0.5)
-                    font_size: 12
-                    size_hint_y: 0.1
+                    font_size: 25
+                    size_hint_y: 0.05
 
 
         GridLayout:
@@ -111,22 +111,22 @@
                     id: particular
                     hint_text: 'Particular'
                     icon_left: 'menu-open'
-                    size_hint_x: 1
-                    font_size: 18
+                    size_hint_x: 0.8
+                    font_size: 30
                     pos_hint: {"center_x": 0.5}
 
                 MDTextFieldRound:
                     id: amount
                     hint_text: 'Enter Amount'
                     icon_left: 'cash-plus'
-                    size_hint_x: 1
-                    font_size: 18
+                    size_hint_x: 0.8
+                    font_size: 30
                     pos_hint: {"center_x": 0.5}
 
                 GridLayout:
                     cols: 2
 
-                    size_hint_y: 0.1
+                    size_hint_y: 0.7
 
                     Button:
                         text: 'Add Data'
@@ -140,7 +140,7 @@
 
                 Button:
                     text: 'Use Constants'
-                    size_hint_y: 0.1
+                    size_hint_y: 0.7
                     on_release:
                         root.manager.current='constant_screen'
                         root.manager.transition.direction='left'
@@ -260,7 +260,7 @@
                     hint_text: 'Enter Amount'
                     icon_left: 'cash-plus'
                     size_hint_x: 1
-                    font_size: 18
+                    font_size: 20
                     helper_text: 'Enter only numbers'
                     helper_text_mode: 'on_error'
                     pos_hint: {"center_x": 0.5}
@@ -339,7 +339,7 @@
                         hint_text: 'Enter Particular'
                         icon_left: 'menu-open'
                         size_hint_x: 1
-                        font_size: 18
+                        font_size: 20
                         pos_hint: {"center_x": 0.5}
 
                     MDFillRoundFlatButton:
