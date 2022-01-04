@@ -10,6 +10,8 @@ from kivy.uix.button import Button
 from kivymd.uix.datatables import MDDataTable
 from kivy.lang import Builder
 from kivy.metrics import dp
+from kivy.core.window import Window
+from kivy.properties import ObjectProperty
 
 
 Builder.load_file('frontend.kv')
@@ -91,7 +93,7 @@ class HomeScreen(Screen):
             self.ids.amount.text = 'Enter only numbers'
 
     def openxl(self):
-        os.startfile(XL.filename)
+        os.system("start "+XL.filename)
 
     def quit(self):
         quit()
@@ -257,7 +259,41 @@ class ViewData(Screen):
 
 #Boiler plate code
 class RootWidget(ScreenManager):
-    pass
+    def __init__(self, **kwargs):
+        super(RootWidget, self).__init__(**kwargs)
+        Window.bind(on_keyboard = self.on_key)
+
+    def on_key(self, window, key, *args):
+        if key == 27:
+            if self.current_screen.name == 'home_screen':
+                quit()
+
+            elif self.current_screen.name == 'constant_screen':
+                self.current = 'home_screen'
+                self.transition.direction = 'right'
+                return True
+
+            elif self.current_screen.name == 'add_constant':
+                self.current = 'constant_screen'
+                self.transition.direction = 'right'
+                return True
+
+            elif self.current_screen.name == 'manage_constant':
+                self.current = 'constant_screen'
+                self.transition.direction = 'down'
+                return True
+
+            elif self.current_screen.name == 'edit_constant':
+                self.current = 'constant_screen'
+                self.transition.direction = 'down'
+                return True
+
+            elif self.current_screen.name == 'view_data':
+                self.current = 'home_screen'
+                self.transition.direction = 'right'
+                return True
+
+
 
 class MainApp(MDApp):
     def build(self):
